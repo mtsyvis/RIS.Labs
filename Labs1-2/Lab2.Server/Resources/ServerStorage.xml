@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfFuelRow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <FuelRow>
+    <Id>24</Id>
+    <DateOfDelivery>2019-10-28T20:17:50.9799878+03:00</DateOfDelivery>
+    <FuelType>test</FuelType>
+    <Amount>34</Amount>
+  </FuelRow>
+  <FuelRow>
+    <Id>1</Id>
+    <DateOfDelivery>2019-10-28T20:20:13.4965341+03:00</DateOfDelivery>
+    <FuelType>dfa</FuelType>
+    <Amount>24</Amount>
+  </FuelRow>
+  <FuelRow>
+    <Id>324</Id>
+    <DateOfDelivery>2019-10-28T20:25:14.6200521+03:00</DateOfDelivery>
+    <FuelType>1234567890</FuelType>
+    <Amount>0</Amount>
+  </FuelRow>
+  <FuelRow>
+    <Id>4</Id>
+    <DateOfDelivery>2019-11-03T13:49:53.7501146+03:00</DateOfDelivery>
+    <FuelType>?????</FuelType>
+    <Amount>23</Amount>
+  </FuelRow>
+</ArrayOfFuelRow>
