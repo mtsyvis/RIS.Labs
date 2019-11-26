@@ -56,9 +56,10 @@ namespace Accounting.Service.Infrastructure
             }
         }
 
-        public void Update(T product)
+        public void Update(List<T> products)
         {
-            throw new NotImplementedException();
+            _products = products;
+            this.Save();
         }
     }
 }

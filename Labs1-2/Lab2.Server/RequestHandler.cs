@@ -14,7 +14,9 @@ namespace Lab2.Server
             new Dictionary<CommandType, IRequestCommand>()
                 {
                     { CommandType.GetAllRow, new GetAllFuelRowCommand() },
-                    { CommandType.DeleteRow, new DeleteFuelRowCommand() }
+                    { CommandType.DeleteRow, new DeleteFuelRowCommand() },
+                    { CommandType.AddRow, new AddFuelRowCommand() },
+                    { CommandType.UpdateRow, new UpdateFuelRowsCommand() }
                 };
 
         public object HandleRequest(Message request)

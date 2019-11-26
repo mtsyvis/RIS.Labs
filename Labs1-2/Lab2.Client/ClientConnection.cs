@@ -30,8 +30,6 @@ namespace Lab2.Client
 
         private void Connect()
         {
-           // if (this._client != null && this._client.Connected) return;
-
             this._client = new TcpClient(address, port);
             this._stream = this._client.GetStream();
         }

@@ -13,7 +13,7 @@ namespace Accounting.Service.Interfaces
 
         void Delete(T product);
 
-        void Update(T product);
+        void Update(List<T> products);
 
         void Save();
     }

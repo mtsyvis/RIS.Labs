@@ -7,7 +7,8 @@ namespace Lab2.Models
     {
         GetAllRow,
         DeleteRow,
-        UpdateRow
+        UpdateRow,
+        AddRow
     }
 
     [Serializable]

@@ -33,6 +33,8 @@ namespace Lab2.Client
                 var answer = _connection.ReceiveMessage();
 
                 this.SetData(answer.Content as List<FuelRow>);
+
+                this.addRowBox.Enabled = true;
             }
             catch (SocketException ex)
             {
@@ -83,17 +85,22 @@ namespace Lab2.Client
             }
         }
 
-        //private void dateTimePicker_OnTextChange(object sender, EventArgs e)
-        //{
-        //    // Saving the 'Selected Date on Calendar' into DataGridView current cell  
-        //    this.dataGridView1.CurrentCell.Value = this.oDateTimePicker.Text.ToString();
-        //}
+        private void AddRowButton_Click(object sender, EventArgs e)
+        {
+            if (this.fuelTypeTextBox.Text != string.Empty && this.fuelAmountTextBox.Text != string.Empty 
+                                                          && double.TryParse(this.fuelAmountTextBox.Text, out var fuelAmount))
+            {
+                var row = new FuelRow()
+                              {
+                                  Id = Guid.NewGuid().ToString(),
+                                  DateOfDelivery = DateTime.Now,
+                                  FuelType = this.fuelTypeTextBox.Text,
+                                  Amount = fuelAmount
+                              };
 
-        //private void oDateTimePicker_CloseUp(object sender, EventArgs e)
-        //{
-        //    // Hiding the control after use   
-        //    this.oDateTimePicker.Visible = false;
-        //}
-
+                ClientConnection.Instance.Send(new Message { Type = CommandType.AddRow, Content = row });
+                this._data.Add(row);
+            }
+        }
     }
 }
