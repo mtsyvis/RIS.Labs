@@ -27,13 +27,13 @@ namespace Lab2.Server
             //this._logger = logger;
         }
 
-        public async Task ProcessAsync()
+        public async void ProcessAsync()
         {
             try
             {
                 var requestHandler = new RequestHandler();
 
-                while (true)
+                while (this._client.Connected)
                 {
                     var request = (Message) _formatter.Deserialize(_stream);
 
@@ -43,6 +43,8 @@ namespace Lab2.Server
 
                     await this.Send(response);
                 }
+
+                ServerLogger.LogMessage($"Client: {this._client.GetHashCode()} disconnected");
             }
             catch (Exception ex)
             {
@@ -58,6 +60,11 @@ namespace Lab2.Server
 
         private async Task Send(object response)
         {
+            if (response is null)
+            {
+                return;
+            }
+
             this._formatter.Serialize(this._stream, response);
             await this._stream.FlushAsync();
             ServerLogger.LogMessage($"Send: {response.ToString()}");

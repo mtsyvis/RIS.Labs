@@ -50,6 +50,7 @@
             this.serverLog.Multiline = true;
             this.serverLog.Name = "serverLog";
             this.serverLog.ReadOnly = true;
+            this.serverLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.serverLog.Size = new System.Drawing.Size(776, 387);
             this.serverLog.TabIndex = 1;
             // 

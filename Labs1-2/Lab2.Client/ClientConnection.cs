@@ -4,8 +4,9 @@ namespace Lab2.Client
 {
     using System.Net.Sockets;
     using System.Runtime.Serialization.Formatters.Binary;
+    using System.Windows.Forms;
 
-    using Lab2.Models;
+    using Message = Lab2.Models.Message;
 
     public sealed class ClientConnection
     {
@@ -23,27 +24,38 @@ namespace Lab2.Client
 
         private ClientConnection()
         {
-            _client = new TcpClient(address, port);
-            _stream = _client.GetStream();
             _formatter = new BinaryFormatter();
+            this.Connect();
         }
 
-        public void Connect()
+        private void Connect()
         {
-            _client = new TcpClient(address, port);
-            _stream = _client.GetStream();
+           // if (this._client != null && this._client.Connected) return;
+
+            this._client = new TcpClient(address, port);
+            this._stream = this._client.GetStream();
         }
 
         public static ClientConnection Instance => _instance.Value;
 
         public void Send(Message message)
         {
+            if (!this._client.Connected)
+            {
+                MessageBox.Show("Server is not running!");
+            }
+
             _formatter.Serialize(_stream, message);
             this._stream.Flush();
         }
 
         public Message ReceiveMessage()
         {
+            if (!this._client.Connected)
+            {
+                MessageBox.Show("Server is not running!");
+            }
+
             return (Message)_formatter.Deserialize(_stream);
         }
     }

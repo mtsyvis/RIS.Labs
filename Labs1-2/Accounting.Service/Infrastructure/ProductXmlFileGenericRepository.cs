@@ -10,7 +10,7 @@ namespace Accounting.Service.Infrastructure
     {
         const string FilePath = @"../../Resources/ServerStorage.xml";
 
-        private List<T> _products = new List<T>();
+        private static List<T> _products = new List<T>();
 
         private XmlSerializer formatter = new XmlSerializer(typeof(List<T>));
 

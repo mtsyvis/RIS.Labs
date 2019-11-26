@@ -18,6 +18,7 @@ namespace Lab2.Server
         {
             InitializeComponent();
             ServerLogger.LoggerBox = this.serverLog;
+            Control.CheckForIllegalCrossThreadCalls = false;
         }
 
         private void StartServer_Click(object sender, EventArgs e)
@@ -45,7 +46,7 @@ namespace Lab2.Server
                 {
                     TcpClient client = await listener.AcceptTcpClientAsync().ConfigureAwait(false);
                     //this.serverLog.AppendText($"Client connected. Socket info: {client.Client.ToString()}");
-                    ServerLogger.LogMessage($"Client connected. Socket info: {client.Client.ToString()}\n");
+                    ServerLogger.LogMessage($"Client {client.GetHashCode()} connected.");
 
                     ClientHandler clientHandler = new ClientHandler(client, this.serverLog);
                     clientHandler.ProcessAsync();
