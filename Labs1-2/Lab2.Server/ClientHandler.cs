@@ -17,14 +17,11 @@ namespace Lab2.Server
 
         private NetworkStream _stream;
 
-        //private TextBox _logger;
-
         public ClientHandler(TcpClient tcpClient, TextBox logger)
         {
             _client = tcpClient;
             _stream = _client.GetStream();
             _formatter = new BinaryFormatter();
-            //this._logger = logger;
         }
 
         public async void ProcessAsync()
@@ -35,7 +32,7 @@ namespace Lab2.Server
 
                 while (this._client.Connected)
                 {
-                    var request = (Message) _formatter.Deserialize(_stream);
+                    var request = (Message)_formatter.Deserialize(_stream);
 
                     ServerLogger.LogMessage($"Client: {_client.GetHashCode()}, request: {request.Type.ToString()}");
 
@@ -43,12 +40,13 @@ namespace Lab2.Server
 
                     await this.Send(response);
                 }
-
+            }
+            catch (SocketException ex)
+            {
                 ServerLogger.LogMessage($"Client: {this._client.GetHashCode()} disconnected");
             }
             catch (Exception ex)
             {
-                //this._logger.AppendText(ex.StackTrace + Environment.NewLine + ex.Message);
                 ServerLogger.LogException(ex);
             }
             finally

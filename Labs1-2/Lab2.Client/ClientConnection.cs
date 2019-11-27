@@ -25,10 +25,9 @@ namespace Lab2.Client
         private ClientConnection()
         {
             _formatter = new BinaryFormatter();
-            this.Connect();
         }
 
-        private void Connect()
+        public void Connect()
         {
             this._client = new TcpClient(address, port);
             this._stream = this._client.GetStream();

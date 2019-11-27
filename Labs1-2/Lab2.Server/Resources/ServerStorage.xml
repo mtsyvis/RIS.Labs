@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <ArrayOfFuelRow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <FuelRow>
-    <Id>24</Id>
+    <Id>69</Id>
     <DateOfDelivery>2019-10-28T20:17:50.9799878+03:00</DateOfDelivery>
     <FuelType>test</FuelType>
-    <Amount>34</Amount>
+    <Amount>26</Amount>
   </FuelRow>
   <FuelRow>
     <Id>1</Id>
@@ -13,9 +13,15 @@
     <Amount>24</Amount>
   </FuelRow>
   <FuelRow>
-    <Id>324</Id>
+    <Id>sfg</Id>
     <DateOfDelivery>2019-10-28T20:25:14.6200521+03:00</DateOfDelivery>
     <FuelType>1234567890</FuelType>
     <Amount>0</Amount>
+  </FuelRow>
+  <FuelRow>
+    <Id>2a9052b5-abde-457d-a73b-f498d139aee9</Id>
+    <DateOfDelivery>2019-11-27T20:22:24.8042288+03:00</DateOfDelivery>
+    <FuelType>sfg</FuelType>
+    <Amount>24</Amount>
   </FuelRow>
 </ArrayOfFuelRow>

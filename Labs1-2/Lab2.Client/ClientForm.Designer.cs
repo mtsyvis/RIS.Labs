@@ -41,6 +41,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.fuelTypeTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.updateChangesButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.addRowBox.SuspendLayout();
             this.SuspendLayout();
@@ -59,17 +60,17 @@
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dataGridView1.Location = new System.Drawing.Point(342, 2);
+            this.dataGridView1.Location = new System.Drawing.Point(304, 2);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(477, 327);
+            this.dataGridView1.Size = new System.Drawing.Size(515, 327);
             this.dataGridView1.TabIndex = 3;
-            this.dataGridView1.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.DataGriView1_UserAddedRow);
+            this.dataGridView1.CellValueChanged += new DataGridViewCellEventHandler(this.DataGridView1_CellValueChanged);
             // 
             // deleteRowButton
             // 
-            this.deleteRowButton.Location = new System.Drawing.Point(855, 71);
+            this.deleteRowButton.Location = new System.Drawing.Point(855, 96);
             this.deleteRowButton.Name = "deleteRowButton";
             this.deleteRowButton.Size = new System.Drawing.Size(122, 23);
             this.deleteRowButton.TabIndex = 4;
@@ -88,7 +89,7 @@
             this.addRowBox.Enabled = false;
             this.addRowBox.Location = new System.Drawing.Point(12, 2);
             this.addRowBox.Name = "addRowBox";
-            this.addRowBox.Size = new System.Drawing.Size(324, 327);
+            this.addRowBox.Size = new System.Drawing.Size(286, 327);
             this.addRowBox.TabIndex = 7;
             this.addRowBox.TabStop = false;
             this.addRowBox.Text = "Add Fuel Row";
@@ -116,7 +117,7 @@
             // 
             this.fuelAmountTextBox.Location = new System.Drawing.Point(6, 97);
             this.fuelAmountTextBox.Name = "fuelAmountTextBox";
-            this.fuelAmountTextBox.Size = new System.Drawing.Size(306, 20);
+            this.fuelAmountTextBox.Size = new System.Drawing.Size(274, 20);
             this.fuelAmountTextBox.TabIndex = 10;
             // 
             // label2
@@ -132,7 +133,7 @@
             // 
             this.fuelTypeTextBox.Location = new System.Drawing.Point(6, 41);
             this.fuelTypeTextBox.Name = "fuelTypeTextBox";
-            this.fuelTypeTextBox.Size = new System.Drawing.Size(306, 20);
+            this.fuelTypeTextBox.Size = new System.Drawing.Size(274, 20);
             this.fuelTypeTextBox.TabIndex = 8;
             // 
             // label1
@@ -144,11 +145,22 @@
             this.label1.TabIndex = 7;
             this.label1.Text = "label1";
             // 
+            // updateChangesButton
+            // 
+            this.updateChangesButton.Location = new System.Drawing.Point(855, 148);
+            this.updateChangesButton.Name = "updateChangesButton";
+            this.updateChangesButton.Size = new System.Drawing.Size(122, 23);
+            this.updateChangesButton.TabIndex = 8;
+            this.updateChangesButton.Text = "Update changes";
+            this.updateChangesButton.UseVisualStyleBackColor = true;
+            this.updateChangesButton.Click += new System.EventHandler(this.UpdateChangesButton_Click);
+            // 
             // ClientForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1009, 476);
+            this.Controls.Add(this.updateChangesButton);
             this.Controls.Add(this.addRowBox);
             this.Controls.Add(this.deleteRowButton);
             this.Controls.Add(this.dataGridView1);
@@ -174,6 +186,7 @@
         private Label f;
         private TextBox fuelAmountTextBox;
         private Button addRowButton;
+        private Button updateChangesButton;
     }
 }
 

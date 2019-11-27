@@ -20,29 +20,33 @@ namespace Lab2.Client
         public ClientForm()
         {
             InitializeComponent();
+            this.addRowBox.Enabled = false;
+            this.updateChangesButton.Enabled = false;
         }
 
         private void ConnectButton_Click(object sender, EventArgs e)
         {
             try
             {
-                var _connection = ClientConnection.Instance;
+                var connection = ClientConnection.Instance;
+                connection.Connect();
 
-                _connection.Send(new ModelMessage { Type = ModelCommandType.GetAllRow });
+                connection.Send(new ModelMessage { Type = ModelCommandType.GetAllRow });
 
-                var answer = _connection.ReceiveMessage();
+                var answer = connection.ReceiveMessage();
 
                 this.SetData(answer.Content as List<FuelRow>);
 
                 this.addRowBox.Enabled = true;
+                this.updateChangesButton.Enabled = true;
             }
             catch (SocketException ex)
             {
                 MessageBox.Show("Server is not running!");
             }
 
-            //var button = (Button)sender;
-            //button.Enabled = false;
+            var button = (Button)sender;
+            button.Enabled = false;
         }
 
         private void SetData(List<FuelRow> fuelRows)
@@ -50,6 +54,7 @@ namespace Lab2.Client
             this._data = new BindingList<FuelRow>(fuelRows);
             this.dataGridView1.DataSource = this._data;
             this.dataGridView1.Columns[1].ReadOnly = true;
+            this._data.RaiseListChangedEvents = false;
         }
 
         private void DeleteRowButton_Click(object sender, EventArgs e)
@@ -61,27 +66,8 @@ namespace Lab2.Client
                     ClientConnection.Instance.Send(new Message() { Type = CommandType.DeleteRow, Content = row.DataBoundItem as FuelRow });
                     this.dataGridView1.Rows.RemoveAt(row.Index);
                 }
-            }
-        }
 
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            // If any cell is clicked on the Second column which is our date Column  
-            if (e.ColumnIndex == 1)
-            {
-                this.dataGridView1.CurrentCell.Value = DateTime.Now;
-            }
-        }
-
-        private void DataGriView1_UserAddedRow(object sender, DataGridViewRowsAddedEventArgs e)
-        {
-            if (this.dataGridView1.RowCount > 1)
-            {
-                this.dataGridView1.Columns[1].ReadOnly = false;
-                this.dataGridView1.Rows[e.RowIndex].Cells[1].Value = DateTime.Now;
-                this.dataGridView1.Columns[1].ReadOnly = true;
-
-                //e. .Row.Cells[1].Value = DateTime.Now;
+                this._data.RaiseListChangedEvents = false;
             }
         }
 
@@ -100,7 +86,27 @@ namespace Lab2.Client
 
                 ClientConnection.Instance.Send(new Message { Type = CommandType.AddRow, Content = row });
                 this._data.Add(row);
+                this._data.RaiseListChangedEvents = false;
             }
+        }
+
+        private void UpdateChangesButton_Click(object sender, EventArgs e)
+        {
+            if (this._data.RaiseListChangedEvents)
+            {
+                var list = new List<FuelRow>(this._data);
+                ClientConnection.Instance.Send(new Message { Type = CommandType.UpdateRow, Content = list });
+                this._data.RaiseListChangedEvents = false;
+            }
+            else
+            {
+                MessageBox.Show("Nothing to update!");
+            }
+        }
+
+        private void DataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            this._data.RaiseListChangedEvents = true;
         }
     }
 }
