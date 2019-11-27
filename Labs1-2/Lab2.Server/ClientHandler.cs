@@ -47,7 +47,14 @@ namespace Lab2.Server
             }
             catch (Exception ex)
             {
-                ServerLogger.LogException(ex);
+                if (ex.InnerException is SocketException)
+                {
+                    ServerLogger.LogMessage($"Client: {this._client.GetHashCode()} disconnected");
+                }
+                else
+                {
+                    ServerLogger.LogException(ex);
+                }
             }
             finally
             {

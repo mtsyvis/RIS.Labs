@@ -10,7 +10,7 @@
     <Id>1</Id>
     <DateOfDelivery>2019-10-28T20:20:13.4965341+03:00</DateOfDelivery>
     <FuelType>dfa</FuelType>
-    <Amount>24</Amount>
+    <Amount>33</Amount>
   </FuelRow>
   <FuelRow>
     <Id>sfg</Id>
@@ -23,5 +23,29 @@
     <DateOfDelivery>2019-11-27T20:22:24.8042288+03:00</DateOfDelivery>
     <FuelType>sfg</FuelType>
     <Amount>24</Amount>
+  </FuelRow>
+  <FuelRow>
+    <Id>8d66db16-264e-4486-a0e5-a0c0133bee81</Id>
+    <DateOfDelivery>2019-11-27T21:39:29.6116218+03:00</DateOfDelivery>
+    <FuelType>sfs</FuelType>
+    <Amount>12</Amount>
+  </FuelRow>
+  <FuelRow>
+    <Id>7d63a259-c1c1-43b1-9f8a-522976c790ca</Id>
+    <DateOfDelivery>2019-11-27T21:39:32.0797732+03:00</DateOfDelivery>
+    <FuelType>sfs</FuelType>
+    <Amount>99</Amount>
+  </FuelRow>
+  <FuelRow>
+    <Id>71adb0ac-beed-4dbf-94ca-f4518ca69b89</Id>
+    <DateOfDelivery>2019-11-27T21:45:13.0744423+03:00</DateOfDelivery>
+    <FuelType>sd</FuelType>
+    <Amount>1</Amount>
+  </FuelRow>
+  <FuelRow>
+    <Id>a2dd6924-6169-472b-882e-5ef47fd54d43</Id>
+    <DateOfDelivery>2019-11-27T21:45:15.0954687+03:00</DateOfDelivery>
+    <FuelType>sd</FuelType>
+    <Amount>1</Amount>
   </FuelRow>
 </ArrayOfFuelRow>

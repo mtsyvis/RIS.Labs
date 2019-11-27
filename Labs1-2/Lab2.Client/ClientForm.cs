@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text;
 using System.Windows.Forms;
 using ModelMessage = Lab2.Models.Message;
 using ModelCommandType = Lab2.Models.CommandType;
@@ -8,7 +7,7 @@ namespace Lab2.Client
 {
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Drawing;
+    using System.Linq;
     using System.Net.Sockets;
 
     using Lab2.Models;
@@ -17,11 +16,14 @@ namespace Lab2.Client
     {
         private BindingList<FuelRow> _data;
 
+        private bool _IsDataChanged = false;
+
         public ClientForm()
         {
             InitializeComponent();
             this.addRowBox.Enabled = false;
             this.updateChangesButton.Enabled = false;
+            this.filterBox.Enabled = false;
         }
 
         private void ConnectButton_Click(object sender, EventArgs e)
@@ -36,9 +38,6 @@ namespace Lab2.Client
                 var answer = connection.ReceiveMessage();
 
                 this.SetData(answer.Content as List<FuelRow>);
-
-                this.addRowBox.Enabled = true;
-                this.updateChangesButton.Enabled = true;
             }
             catch (SocketException ex)
             {
@@ -47,6 +46,9 @@ namespace Lab2.Client
 
             var button = (Button)sender;
             button.Enabled = false;
+            this.addRowBox.Enabled = true;
+            this.updateChangesButton.Enabled = true;
+            this.filterBox.Enabled = true;
         }
 
         private void SetData(List<FuelRow> fuelRows)
@@ -54,7 +56,6 @@ namespace Lab2.Client
             this._data = new BindingList<FuelRow>(fuelRows);
             this.dataGridView1.DataSource = this._data;
             this.dataGridView1.Columns[1].ReadOnly = true;
-            this._data.RaiseListChangedEvents = false;
         }
 
         private void DeleteRowButton_Click(object sender, EventArgs e)
@@ -86,17 +87,16 @@ namespace Lab2.Client
 
                 ClientConnection.Instance.Send(new Message { Type = CommandType.AddRow, Content = row });
                 this._data.Add(row);
-                this._data.RaiseListChangedEvents = false;
             }
         }
 
         private void UpdateChangesButton_Click(object sender, EventArgs e)
         {
-            if (this._data.RaiseListChangedEvents)
+            if (this._IsDataChanged)
             {
                 var list = new List<FuelRow>(this._data);
                 ClientConnection.Instance.Send(new Message { Type = CommandType.UpdateRow, Content = list });
-                this._data.RaiseListChangedEvents = false;
+                this._IsDataChanged = false;
             }
             else
             {
@@ -106,7 +106,29 @@ namespace Lab2.Client
 
         private void DataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            this._data.RaiseListChangedEvents = true;
+            this._IsDataChanged = true;
+        }
+
+        private void FilterDataButton_Click(object sender, EventArgs e)
+        {
+            if (double.TryParse(this.startAmountTextBox.Text, out var startAmount)
+                && double.TryParse(this.endAmountTextBox.Text, out var endAmount) && startAmount <= endAmount)
+            {
+                var filterData = this._data.Where(f => f.Amount >= startAmount && f.Amount <= endAmount);
+                this.dataGridView1.DataSource = filterData.ToList();
+            }
+            else
+            {
+                MessageBox.Show("Wrong parameters to filter!");
+            }
+        }
+
+        private void CancelFilterButton_Click(object sender, EventArgs e)
+        {
+            if (!object.ReferenceEquals(this._data, this.dataGridView1.DataSource))
+            {
+                this.dataGridView1.DataSource = this._data;
+            }
         }
     }
 }

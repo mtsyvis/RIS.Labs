@@ -42,8 +42,16 @@
             this.fuelTypeTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.updateChangesButton = new System.Windows.Forms.Button();
+            this.filterBox = new System.Windows.Forms.GroupBox();
+            this.startAmountLabel = new System.Windows.Forms.Label();
+            this.startAmountTextBox = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.endAmountTextBox = new System.Windows.Forms.TextBox();
+            this.filterDataButton = new System.Windows.Forms.Button();
+            this.cancelFilterButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.addRowBox.SuspendLayout();
+            this.filterBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // ConnectButton
@@ -64,9 +72,9 @@
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(515, 327);
+            this.dataGridView1.Size = new System.Drawing.Size(515, 362);
             this.dataGridView1.TabIndex = 3;
-            this.dataGridView1.CellValueChanged += new DataGridViewCellEventHandler(this.DataGridView1_CellValueChanged);
+            this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView1_CellValueChanged);
             // 
             // deleteRowButton
             // 
@@ -89,7 +97,7 @@
             this.addRowBox.Enabled = false;
             this.addRowBox.Location = new System.Drawing.Point(12, 2);
             this.addRowBox.Name = "addRowBox";
-            this.addRowBox.Size = new System.Drawing.Size(286, 327);
+            this.addRowBox.Size = new System.Drawing.Size(286, 179);
             this.addRowBox.TabIndex = 7;
             this.addRowBox.TabStop = false;
             this.addRowBox.Text = "Add Fuel Row";
@@ -155,11 +163,79 @@
             this.updateChangesButton.UseVisualStyleBackColor = true;
             this.updateChangesButton.Click += new System.EventHandler(this.UpdateChangesButton_Click);
             // 
+            // filterBox
+            // 
+            this.filterBox.Controls.Add(this.cancelFilterButton);
+            this.filterBox.Controls.Add(this.filterDataButton);
+            this.filterBox.Controls.Add(this.label4);
+            this.filterBox.Controls.Add(this.endAmountTextBox);
+            this.filterBox.Controls.Add(this.startAmountLabel);
+            this.filterBox.Controls.Add(this.startAmountTextBox);
+            this.filterBox.Location = new System.Drawing.Point(12, 188);
+            this.filterBox.Name = "filterBox";
+            this.filterBox.Size = new System.Drawing.Size(286, 176);
+            this.filterBox.TabIndex = 9;
+            this.filterBox.TabStop = false;
+            this.filterBox.Text = "Filter Box";
+            // 
+            // startAmountLabel
+            // 
+            this.startAmountLabel.AutoSize = true;
+            this.startAmountLabel.Location = new System.Drawing.Point(7, 23);
+            this.startAmountLabel.Name = "startAmountLabel";
+            this.startAmountLabel.Size = new System.Drawing.Size(68, 13);
+            this.startAmountLabel.TabIndex = 11;
+            this.startAmountLabel.Text = "Start Amount";
+            // 
+            // startAmountTextBox
+            // 
+            this.startAmountTextBox.Location = new System.Drawing.Point(6, 44);
+            this.startAmountTextBox.Name = "startAmountTextBox";
+            this.startAmountTextBox.Size = new System.Drawing.Size(274, 20);
+            this.startAmountTextBox.TabIndex = 10;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(7, 76);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(65, 13);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "End Amount";
+            // 
+            // endAmountTextBox
+            // 
+            this.endAmountTextBox.Location = new System.Drawing.Point(6, 97);
+            this.endAmountTextBox.Name = "endAmountTextBox";
+            this.endAmountTextBox.Size = new System.Drawing.Size(274, 20);
+            this.endAmountTextBox.TabIndex = 12;
+            // 
+            // filterDataButton
+            // 
+            this.filterDataButton.Location = new System.Drawing.Point(6, 138);
+            this.filterDataButton.Name = "filterDataButton";
+            this.filterDataButton.Size = new System.Drawing.Size(75, 23);
+            this.filterDataButton.TabIndex = 14;
+            this.filterDataButton.Text = "Filter Data";
+            this.filterDataButton.UseVisualStyleBackColor = true;
+            this.filterDataButton.Click += new System.EventHandler(this.FilterDataButton_Click);
+            // 
+            // cancelFilterButton
+            // 
+            this.cancelFilterButton.Location = new System.Drawing.Point(205, 138);
+            this.cancelFilterButton.Name = "cancelFilterButton";
+            this.cancelFilterButton.Size = new System.Drawing.Size(75, 23);
+            this.cancelFilterButton.TabIndex = 15;
+            this.cancelFilterButton.Text = "Cancel";
+            this.cancelFilterButton.UseVisualStyleBackColor = true;
+            this.cancelFilterButton.Click += new System.EventHandler(this.CancelFilterButton_Click);
+            // 
             // ClientForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1009, 476);
+            this.Controls.Add(this.filterBox);
             this.Controls.Add(this.updateChangesButton);
             this.Controls.Add(this.addRowBox);
             this.Controls.Add(this.deleteRowButton);
@@ -170,6 +246,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.addRowBox.ResumeLayout(false);
             this.addRowBox.PerformLayout();
+            this.filterBox.ResumeLayout(false);
+            this.filterBox.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -187,6 +265,13 @@
         private TextBox fuelAmountTextBox;
         private Button addRowButton;
         private Button updateChangesButton;
+        private GroupBox filterBox;
+        private Button filterDataButton;
+        private Label label4;
+        private TextBox endAmountTextBox;
+        private Label startAmountLabel;
+        private TextBox startAmountTextBox;
+        private Button cancelFilterButton;
     }
 }
 
