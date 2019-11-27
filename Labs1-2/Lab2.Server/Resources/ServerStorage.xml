@@ -40,12 +40,12 @@
     <Id>71adb0ac-beed-4dbf-94ca-f4518ca69b89</Id>
     <DateOfDelivery>2019-11-27T21:45:13.0744423+03:00</DateOfDelivery>
     <FuelType>sd</FuelType>
-    <Amount>1</Amount>
+    <Amount>3</Amount>
   </FuelRow>
   <FuelRow>
-    <Id>a2dd6924-6169-472b-882e-5ef47fd54d43</Id>
-    <DateOfDelivery>2019-11-27T21:45:15.0954687+03:00</DateOfDelivery>
-    <FuelType>sd</FuelType>
-    <Amount>1</Amount>
+    <Id>1ee23df0-929d-42e9-b01a-cd7d3423e72a</Id>
+    <DateOfDelivery>2019-11-28T01:34:03.8487972+03:00</DateOfDelivery>
+    <FuelType>s</FuelType>
+    <Amount>24</Amount>
   </FuelRow>
 </ArrayOfFuelRow>

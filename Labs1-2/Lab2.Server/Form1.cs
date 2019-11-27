@@ -24,7 +24,6 @@ namespace Lab2.Server
         private void StartServer_Click(object sender, EventArgs e)
         {
             var serverWorkThread = new Thread(new ThreadStart(this.StartServer));
-            //Task.Run(this.StartServer).Wait();
 
             serverWorkThread.Start();
 
@@ -32,33 +31,29 @@ namespace Lab2.Server
             button.Enabled = false;
         }
 
-        private async void StartServer()
+        private void StartServer()
         {
             try
             {
                 listener = new TcpListener(IPAddress.Parse(IpAddress), Port);
                 listener.Start();
 
-                //this.serverLog.AppendText("Wait connection...");
                 ServerLogger.LogMessage("Wait connection...");
 
                 while (true)
                 {
-                    TcpClient client = await listener.AcceptTcpClientAsync().ConfigureAwait(false);
-                    //this.serverLog.AppendText($"Client connected. Socket info: {client.Client.ToString()}");
+                    TcpClient client = listener.AcceptTcpClient();//.ConfigureAwait(false);
                     ServerLogger.LogMessage($"Client {client.GetHashCode()} connected.");
 
                     ClientHandler clientHandler = new ClientHandler(client, this.serverLog);
-                    clientHandler.ProcessAsync();
 
-                    //Thread clientThread = new Thread(new ThreadStart(clientHandler.ProcessAsync));
-                    //clientThread.Start();
+                    var clientThread = new Thread(clientHandler.ProcessAsync);
+                    clientThread.Start();
                 }
             }
             catch (Exception ex)
             {
                 this.serverLog.AppendText(ex.Message);
-                //ServerLogger.LogMessage(ex.Message);
             }
             finally
             {
